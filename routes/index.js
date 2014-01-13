@@ -2,13 +2,15 @@
   "use strict";
 
   var mongoose = require('mongoose'),
+    fs = require('fs'),
+    path = require('path'),
     Configuration = mongoose.model('Configuration'),
 
     // load each module
     //pageDataRoutes = require('./pageData'),
     // transactionRoutes = require('./transaction'),
     // configurationRoutes = require('./configuration'),
-    // themeRoutes = require('./themes'),
+    productRoutes = require('./products'),
     //componentRoutes = require('./components'),
     // domainRoutes = require('./domains'),
     // githubRoutes = require('./github'),
@@ -20,7 +22,9 @@
     extend = require('node.extend');
 
   function index(req, res) {
-    res.render('index');
+    //res.render('index');
+    fs.createReadStream(path.join(process.cwd(), 'views', 'index.hbs'))
+      .pipe(res);
   };
 
   function getRegister(req, res) {
@@ -78,7 +82,7 @@
 
     //    pageDataRoutes.init(app);
     // configurationRoutes.init(app);
-    // themeRoutes.init(app);
+    productRoutes.init(app);
     // domainRoutes.init(app);
     // githubRoutes.init(app);
     // transactionRoutes.init(app);

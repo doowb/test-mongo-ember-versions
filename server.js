@@ -8,7 +8,7 @@ module.exports = (function () {
   var express = require('express'),
     http = require('http'),
     hbs = require('hbs'),
-    dbConfig = require('.config/credentials'),
+    dbConfig = require('./config/credentials'),
 
     mongoose = require('mongoose'),
     passport = require('passport'),
