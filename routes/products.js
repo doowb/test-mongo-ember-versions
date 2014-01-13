@@ -7,6 +7,8 @@
 
 	exports.init = function (app) {
 
+		console.log('Product', require('util').inspect(Product));
+
 		crud.initRoutesForModel({
 			'app': app,
 			'model': Product

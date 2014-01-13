@@ -21,7 +21,11 @@
     return function (req, res) {
       model.find({}, function (err, result) {
         if (!err) {
-          res.send(result);
+          if (!result) result = [];
+          var json = {};
+          json[model.modelName.toLowerCase() + 's'] = result
+          console.log(json);
+          res.send(json);
         } else {
           res.send(errMsg(err));
         }
@@ -34,10 +38,13 @@
   //
   function getCreateController(model) {
     return function (req, res) {
-      var m = new model(req.body);
+      var m = new model(req.body[model.modelName.toLowerCase()]);
+      console.log(m);
       m.save(function (err) {
         if (!err) {
-          res.send(m);
+          var json = {};
+          json[model.modelName.toLowerCase()] = m;
+          res.send(json);
         } else {
           res.send(errMsg(err));
         }
@@ -52,7 +59,9 @@
     return function (req, res) {
       model.findById(req.params.id, function (err, result) {
         if (!err) {
-          res.send(result);
+          var json = {};
+          json[model.modelName.toLowerCase()] = result;
+          res.send(json);
         } else {
           res.send(errMsg(err));
         }
@@ -67,12 +76,15 @@
     return function (req, res) {
       model.findById(req.params.id, function (err, result) {
         var key;
-        for (key in req.body) {
-          result[key] = req.body[key];
+        var update = req.body[model.modelName.toLowerCase()];
+        for (key in update) {
+          result[key] = update[key];
         }
         result.save(function (err) {
           if (!err) {
-            res.send(result);
+            var json = {};
+            json[model.modelName.toLowerCase()] = result;
+            res.send(json);
           } else {
             res.send(errMsg(err));
           }
@@ -113,7 +125,7 @@
       return;
     }
 
-    path = options.path || '/api/' + model.modelName.toLowerCase();
+    path = options.path || '/api/' + model.modelName.toLowerCase() + 's';
     pathWithId = path + '/:id';
 
     app.get(path, getListController(model));

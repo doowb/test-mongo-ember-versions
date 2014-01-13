@@ -1,6 +1,7 @@
 (function (exports) {
 
   var mongoose = require('mongoose'),
+    version = require('mongoose-version'),
     ObjectId = mongoose.Schema.Types.ObjectId,
 
     ProductSchema = new mongoose.Schema({
@@ -41,6 +42,14 @@
         'default': true
       }
     });
+
+  ProductSchema.plugin(version, {
+    collection: 'product_versions',
+    suppressVersionIncrement: false,
+    strategy: 'collection',
+    mongoose: mongoose,
+    logError: true
+  });
 
   exports = mongoose.model('Product', ProductSchema);
 
