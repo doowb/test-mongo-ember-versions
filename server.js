@@ -40,11 +40,7 @@ module.exports = (function () {
   routes.init(app);
 
   var env = 'dev';
-  //mongoose.connect("127.0.0.1", "themes", 27017);
-  //mongoose.connect(dbConfig[env].url, dbConfig[env].database, dbConfig[env].port);
   mongoose.connect(dbConfig[env].url);
-
-  //  mongooseAuth.helpExpress(app);
 
   var port = process.env.PORT || 3000
   var server = http.createServer(app).listen(port);

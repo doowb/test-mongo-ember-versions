@@ -24,7 +24,6 @@
           if (!result) result = [];
           var json = {};
           json[model.modelName.toLowerCase() + 's'] = result
-          console.log(json);
           res.send(json);
         } else {
           res.send(errMsg(err));
@@ -39,7 +38,6 @@
   function getCreateController(model) {
     return function (req, res) {
       var m = new model(req.body[model.modelName.toLowerCase()]);
-      console.log(m);
       m.save(function (err) {
         if (!err) {
           var json = {};
