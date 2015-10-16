@@ -26,5 +26,12 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/doowb/test-mongo-ember-versions/issues"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Brian Woodward",
+      "email": "brian.woodward@gmail.com",
+      "url": "https://github.com/doowb"
+    }
+  ]
 }
